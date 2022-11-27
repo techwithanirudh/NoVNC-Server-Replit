@@ -1,0 +1,6 @@
+# proot is used to make sure everything that needs dbus works. Since proot breaks every directory it touches, we only use /var/lib/dbus/machine-id for the machine id
+# We add a machine id to the machine ID file (.dbus/machine-id). Doesn't matter if we regenerate during a session, they're unique anyway.
+run = "dbus-uuidgen>$HOME/$REPL_SLUG/.dbus/machine-id; proot --mount=$HOME/$REPL_SLUG/.dbus/session.conf:/etc/dbus-1/session.conf --mount=$HOME/$REPL_SLUG/.dbus/machine-id:/var/lib/dbus/machine-id --rootfs=/ bash index.sh"
+
+[nix]
+channel = "stable-21_11"
